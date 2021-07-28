@@ -300,6 +300,34 @@ hosts-slimjet-user:
 	*)          echo "The operating system $(OS) is not supported"; exit 1 ;; \
 	esac
 
+.PHONY: hosts-edge
+hosts-edge:
+	@case $(OS) in \
+	Linux)      mkdir -p "/etc/opt/edge/native-messaging-hosts/"; \
+	            ln -sfv "$(LIB_DIR)/browserpass/hosts/chromium/$(APP_ID).json" "/etc/opt/edge/native-messaging-hosts/$(APP_ID).json"; \
+	            [ -e "/etc/opt/edge/native-messaging-hosts/$(APP_ID).json" ] || echo "Error: the symlink points to a non-existent location" >&2; \
+	            ;; \
+	Darwin)     mkdir -p "/Library/Microsoft/Edge/NativeMessagingHosts/"; \
+	            ln -sfv "$(LIB_DIR)/browserpass/hosts/chromium/$(APP_ID).json" "/Library/Microsoft/Edge/NativeMessagingHosts/$(APP_ID).json"; \
+	            [ -e "/Library/Microsoft/Edge/NativeMessagingHosts/$(APP_ID).json" ] || echo "Error: the symlink points to a non-existent location" >&2; \
+	            ;; \
+	*)          echo "The operating system $(OS) is not supported"; exit 1 ;; \
+	esac
+
+.PHONY: hosts-edge-user
+hosts-edge-user:
+	@case $(OS) in \
+	Linux)      mkdir -p "${HOME}/.config/microsoft-edge/NativeMessagingHosts/"; \
+	            ln -sfv "$(LIB_DIR)/browserpass/hosts/chromium/$(APP_ID).json" "${HOME}/.config/microsoft-edge/NativeMessagingHosts/$(APP_ID).json"; \
+	            [ -e "${HOME}/.config/microsoft-edge/NativeMessagingHosts/$(APP_ID).json" ] || echo "Error: the symlink points to a non-existent location" >&2; \
+	            ;; \
+	Darwin)     mkdir -p "${HOME}/Library/Application Support/Microsoft Edge/NativeMessagingHosts/"; \
+	            ln -sfv "$(LIB_DIR)/browserpass/hosts/chromium/$(APP_ID).json" "${HOME}/Library/Application Support/Microsoft Edge/NativeMessagingHosts/$(APP_ID).json"; \
+	            [ -e "${HOME}/Library/Application Support/Microsoft Edge/NativeMessagingHosts/$(APP_ID).json" ] || echo "Error: the symlink points to a non-existent location" >&2; \
+	            ;; \
+	*)          echo "The operating system $(OS) is not supported"; exit 1 ;; \
+	esac
+
 .PHONY: hosts-firefox
 hosts-firefox:
 	@case $(OS) in \
@@ -494,6 +522,34 @@ policies-slimjet-user:
 	Darwin)     mkdir -p "${HOME}/Library/Application Support/Slimjet/policies/managed/"; \
 	            ln -sfv "$(LIB_DIR)/browserpass/policies/chromium/$(APP_ID).json" "${HOME}/Library/Application Support/Slimjet/policies/managed/$(APP_ID).json"; \
 	            [ -e "${HOME}/Library/Application Support/Slimjet/policies/managed/$(APP_ID).json" ] || echo "Error: the symlink points to a non-existent location" >&2; \
+	            ;; \
+	*)          echo "The operating system $(OS) is not supported"; exit 1 ;; \
+	esac
+
+.PHONY: policies-edge
+policies-edge:
+	@case $(OS) in \
+	Linux)      mkdir -p "/etc/opt/edge/policies/managed/"; \
+	            ln -sfv "$(LIB_DIR)/browserpass/policies/chromium/$(APP_ID).json" "/etc/opt/edge/policies/managed/$(APP_ID).json"; \
+	            [ -e "/etc/opt/edge/policies/managed/$(APP_ID).json" ] || echo "Error: the symlink points to a non-existent location" >&2; \
+	            ;; \
+	Darwin)     mkdir -p "/Library/Microsoft/Edge/policies/managed/"; \
+	            ln -sfv "$(LIB_DIR)/browserpass/policies/chromium/$(APP_ID).json" "/Library/Microsoft/Edge/policies/managed/$(APP_ID).json"; \
+	            [ -e "/Library/Microsoft/Edge/policies/managed/$(APP_ID).json" ] || echo "Error: the symlink points to a non-existent location" >&2; \
+	            ;; \
+	*)          echo "The operating system $(OS) is not supported"; exit 1 ;; \
+	esac
+
+.PHONY: policies-edge-user
+policies-edge-user:
+	@case $(OS) in \
+	Linux)      mkdir -p "${HOME}/.config/microsoft-edge/policies/managed/"; \
+	            ln -sfv "$(LIB_DIR)/browserpass/policies/chromium/$(APP_ID).json" "${HOME}/.config/microsoft-edge/policies/managed/$(APP_ID).json"; \
+	            [ -e "${HOME}/.config/microsoft-edge/policies/managed/$(APP_ID).json" ] || echo "Error: the symlink points to a non-existent location" >&2; \
+	            ;; \
+	Darwin)     mkdir -p "${HOME}/Library/Application Support/Microsoft Edge/policies/managed/"; \
+	            ln -sfv "$(LIB_DIR)/browserpass/policies/chromium/$(APP_ID).json" "${HOME}/Library/Application Support/Microsoft Edge/policies/managed/$(APP_ID).json"; \
+	            [ -e "${HOME}/Library/Application Support/Microsoft Edge/policies/managed/$(APP_ID).json" ] || echo "Error: the symlink points to a non-existent location" >&2; \
 	            ;; \
 	*)          echo "The operating system $(OS) is not supported"; exit 1 ;; \
 	esac
